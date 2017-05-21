@@ -13,6 +13,9 @@ gem 'inesita-router', '~> 0.1.0'
 # bootsrap assets
 gem 'bootstrap-sass'
 
+# State Store from clearwater-rb
+gem 'grand_central'
+
 # rails-assets are also supported
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-bootstrap'
