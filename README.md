@@ -1,5 +1,7 @@
 # inesita_app_with_grand_central_store
 
+Proof of concept combination of [Inesita frontend web app framework](https://github.com/inesita-rb/inesita) and [GrandCentral state management store](https://github.com/clearwater-rb/grand_central). Adds a simple undo/redo functionality to the counter demo.
+
 ```sh
 $ bundle install
 $ bundle exec inesita server
