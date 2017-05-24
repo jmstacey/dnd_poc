@@ -16,7 +16,12 @@ gem 'bootstrap-sass'
 # State Store from clearwater-rb
 gem 'grand_central'
 
-# rails-assets are also supported
-# source 'https://rails-assets.org' do
-#   gem 'rails-assets-bootstrap'
-# end
+# The venerable JQuery library which is required by Nestable
+gem 'opal-jquery'
+
+# rails-assets
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-nestable2'
+end
