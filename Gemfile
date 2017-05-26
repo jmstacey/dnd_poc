@@ -1,7 +1,11 @@
 source "https://rubygems.org"
 
+# templates gems
+gem 'slim'
+gem 'sass'
+
 # inesita gem
-gem 'inesita', '~> 0.6.0'
+gem 'inesita', '~> 0.6.0', :git => 'https://github.com/jmstacey/inesita.git', :ref => 'a6f07b687988aa088c754aebca625cde0cea1db3'
 gem 'inesita-livereload', '~> 0.1.0'
 gem 'inesita-router', '~> 0.1.0'
 

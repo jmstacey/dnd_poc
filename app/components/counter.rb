@@ -35,5 +35,6 @@ class Counter
         end
       end
     end
+
   end
 end

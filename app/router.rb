@@ -3,6 +3,6 @@ class Router
 
   def routes
     route '/', to: Home
-    route '/description', to: Description
+    route '/outline', to: Outline #, on_enter: -> { store.app.dispatch :set_screen_is_clean }
   end
 end
