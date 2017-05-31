@@ -22,23 +22,6 @@ class Outline
 
   def render
     div class: "dd", id: "outline", hook: unhook(:will_unmount)
-
-    h4 do
-      text props[:sub_header]
-    end
-    div class: 'input-group' do
-      span class: 'input-group-btn' do
-        button class: 'btn btn-default', onclick: -> { store.app.rollback } do
-          text 'Undo'
-        end
-      end
-      input type: "text", class: "form-control", value: store.app.current_version, disabled: true
-      span class: 'input-group-btn' do
-        button class: 'btn btn-default', onclick: -> { store.app.redo } do
-          text 'Redo'
-        end
-      end
-    end
   end
 
 end

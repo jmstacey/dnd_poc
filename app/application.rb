@@ -28,6 +28,9 @@ class Application
       component NavBar
       component router
     end
+
+    # todo: way to check for development mode?
+    component DevTimeTravel
   end
 end
 
