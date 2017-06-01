@@ -29,11 +29,10 @@ class Application
       component router
     end
 
-    # todo: way to check for development mode?
+    # TODO: way to check for development mode?
     component DevTimeTravel
   end
 end
-
 
 Inesita::Browser.ready? do
   Application.mount_to(Inesita::Browser.body)

@@ -3,34 +3,37 @@ class Outline
 
   Element.expose :nestable
 
-  def on_dd_change(container, element_changed)
-    js_obj = container.nestable('serialize')
+  def on_dd_change(node, _element_changed)
+    js_obj = node.nestable('serialize')
     new_data = JSON.from_object(js_obj)
 
     if new_data != store.app.state.visible_data
       store.app.dispatch Actions::UpdateVisibleData.new(new_data)
     end
-
-    # puts "App Store: #{store.app.state.visible_data}"
   end
 
-  def will_unmount
-    Element['#outline'].nestable('destroy') # Deactivate plugin invalidating this outline as it should be deployed clean from the store now for one-way binding
+  def after_render(node, _name, _previous)
+    # puts "after_render"
+    @_previous_node = node # Helper for before_render
+    Element[node.to_n].nestable({ json:     store.app.state.visible_data,
+                                  callback: method(:on_dd_change).to_proc }.to_n)
+    # Element[node.to_n].nestable({callback: method(:on_dd_change).to_proc }.to_n) # #to_n converts to native javascript. Provided by opal-jquery
   end
 
-  def on_mounted
-    # Element['#outline'].nestable({ 'callback': method(:on_dd_change).to_proc }.to_n) # #to_n converts to native javascript. Provided by opal-jquery
-    Element['#outline'].nestable({ 'json': store.app.state.visible_data, 'callback': method(:on_dd_change).to_proc }.to_n) # #to_n converts to native javascript. Provided by opal-jquery
+  def before_render
+    # puts "before_render"
+    Element[@_previous_node.to_n].nestable('destroy') unless @_previous_node.nil?
   end
 
   def render
-    div class: "dd", id: "outline", hook: unhook(:will_unmount)
+    # puts "render"
+    div class: 'dd', id: 'outline', hook: hook(:after_render)
 
-    div # Without this, things break badly for some reason.
-
-    # div class: "dd", id: "outline", hook: unhook(:will_unmount) do
-    #   component OutlineTree, props: {outline_tree: store.app.state.visible_data}
+    # div class: "dd", id: "outline", hook: hook(:on_hook) do
+    #   component OutlineTree, props: { outline_tree: store.app.state.visible_data }
     # end
+
+    div # Keep this! Without extra trailing rendering breaks.
   end
 
 end
